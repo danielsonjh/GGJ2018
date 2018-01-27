@@ -34,13 +34,19 @@ namespace Pigeons
 
             if (transform.position.x > StartPosition.x * -1)
             {
-                Destroy(gameObject);
+                FinishJourney();
             }
         }
 
         void OnMouseUp()
         {
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * ClickForce, ForceMode2D.Impulse);
+        }
+
+        private void FinishJourney()
+        {
+            Stats.Instance.Score++;
+            Destroy(gameObject);
         }
     }
 }

@@ -23,16 +23,9 @@ namespace Eagles
             }
             else
             {
-                if (_nearestPigeon == null)
-                {
-                    Debug.Log("Looking for nearest pigeon");
-                    FindNearestPigeon();
-                }
-                else
-                {
-                    Debug.Log(_nearestPigeon.transform.position);
-                    HuntNearestPigeon();
-                }
+                FindNearestPigeon();
+                Debug.Log(_nearestPigeon.transform.position);
+                HuntNearestPigeon();
             }
         }
 
@@ -44,14 +37,6 @@ namespace Eagles
             if (_health <= 0)
             {
                 Destroy(gameObject);
-            }
-        }
-
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.CompareTag("Pigeon"))
-            {
-                Destroy(other.gameObject);
             }
         }
 
