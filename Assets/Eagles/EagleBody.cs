@@ -8,7 +8,7 @@ namespace Eagles
         {
             if (other.CompareTag("Pigeon"))
             {
-                Destroy(other.gameObject);
+                Destroy(other.transform.parent.gameObject);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Eagles
     {
         private const float Speed = 4f;
         private const float HitDuration = 0.35f;
-        private const float HitSpeed = 8f;
+        private const float HitSpeed = 50f;
 
         private int _health = 3;
         private float _hitTimer;
@@ -24,7 +24,6 @@ namespace Eagles
             else
             {
                 FindNearestPigeon();
-                Debug.Log(_nearestPigeon.transform.position);
                 HuntNearestPigeon();
             }
         }
@@ -64,7 +63,7 @@ namespace Eagles
 
         private void Flee()
         {
-            transform.position -= GetDirectionToNearestPigeon() * HitSpeed * _hitTimer / HitDuration * Time.deltaTime;
+            transform.position -= GetDirectionToNearestPigeon() * HitSpeed * Mathf.Pow(_hitTimer, 2f) / HitDuration * Time.deltaTime;
         }
 
         private Vector3 GetDirectionToNearestPigeon()

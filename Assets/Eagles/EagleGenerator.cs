@@ -6,7 +6,7 @@ namespace Eagles
     {
         public GameObject Eagle;
 
-        private const float SecondsBetweenBirds = 5f;
+        private const float SecondsBetweenBirds = 3f;
 
         private float _secondsUntilNextBird = 0f;
 

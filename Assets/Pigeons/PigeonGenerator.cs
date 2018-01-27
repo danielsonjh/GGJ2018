@@ -6,9 +6,9 @@ namespace Pigeons
     {
         public GameObject Pigeon;
 
-        private const float SecondsBetweenBirds = 1.25f;
+        private const float SecondsBetweenBirds = 1f;
 
-        private float _secondsUntilNextBird = 0f;
+        private float _secondsUntilNextBird;
 
 
         void Update()
