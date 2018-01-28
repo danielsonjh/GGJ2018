@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Pigeons;
+using UnityEngine;
 
 namespace Eagles
 {
@@ -8,6 +9,7 @@ namespace Eagles
         {
             if (other.CompareTag("Pigeon"))
             {
+                Resource.Map[other.GetComponentInParent<Pigeon>().Color].Decrease();
                 Destroy(other.transform.parent.gameObject);
             }
         }

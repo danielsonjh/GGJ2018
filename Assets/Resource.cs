@@ -8,7 +8,8 @@ public class Resource : MonoBehaviour
     public static Dictionary<ResourceColor, Resource> Map = new Dictionary<ResourceColor, Resource>();
 
     private const float MaxValue = 100;
-    private const float DecayPerSecond = 4;
+    private const float IncrementValue = 10;
+    private const float DecrementValue = 5;
 
     [SerializeField] private ResourceColor _color;
     private float _value = MaxValue;
@@ -26,20 +27,23 @@ public class Resource : MonoBehaviour
 
     void Update()
     {
-        _value -= DecayPerSecond * Time.deltaTime;
+        _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -Screen.height * (MaxValue - _value) / MaxValue);
+    }
+
+    public void Increase()
+    {
+        _value = Mathf.Clamp(_value + IncrementValue, 0, MaxValue);
+    }
+
+    public void Decrease()
+    {
+        _value -= DecrementValue;
 
         if (_value < 0)
         {
             Debug.LogError("GAME OVER");
             Time.timeScale = 0;
         }
-
-        _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -Screen.height * (MaxValue - _value) / MaxValue);
-    }
-
-    public void Increase(int amount)
-    {
-        _value = Mathf.Clamp(_value + amount, 0, MaxValue);
     }
 }
 

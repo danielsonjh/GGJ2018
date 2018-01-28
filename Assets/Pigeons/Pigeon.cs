@@ -43,7 +43,7 @@ namespace Pigeons
 
         private void FinishJourney()
         {
-            Resource.Map[Color].Increase(20);
+            Resource.Map[Color].Increase();
             Destroy(gameObject);
         }
     }
