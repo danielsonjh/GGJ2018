@@ -22,8 +22,6 @@ public class Resource : MonoBehaviour
 
     void Update()
     {
-        print(Screen.height);
-        print(_value);
         _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -1080 * (MaxValue - _value) / MaxValue);
     }
 
