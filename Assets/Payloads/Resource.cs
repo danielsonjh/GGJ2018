@@ -1,5 +1,6 @@
 ﻿using Payloads;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Resource : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class Resource : MonoBehaviour
 
     private const float MaxValue = 100;
 
+    [SerializeField] private Text _scoreText;
+
+    private float _totalEarned;
     private float _value = MaxValue;
     private RectTransform _rectTransform;
 
@@ -23,10 +27,12 @@ public class Resource : MonoBehaviour
     void Update()
     {
         _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -1080 * (MaxValue - _value) / MaxValue);
+        _scoreText.text = _totalEarned.ToString();
     }
 
     public void DeliverPayload(IPayload payload)
     {
+        _totalEarned += payload.Value;
         _value = Mathf.Clamp(_value + payload.Value, 0, MaxValue);
     }
 

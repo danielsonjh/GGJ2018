@@ -9,8 +9,8 @@ namespace Pigeons
         private const float MinSpeed = 2.5f;
         private const float MaxGravityScale = 5f;
         private const float MinGravityScale = 3f;
-        private const float ClickForce = 30f;
-        private const float LinearDrag = 7f;
+        private const float ClickForce = 35f;
+        private const float LinearDrag = 10f;
 
         private static readonly Vector2 StartPosition = new Vector2(-8f, 3f);
 

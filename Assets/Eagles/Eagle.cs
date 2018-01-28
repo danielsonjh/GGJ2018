@@ -8,9 +8,9 @@ namespace Eagles
     public class Eagle : MonoBehaviour
     {
         private const string HitAnimationParam = "IsHit";
-        private const float Speed = 4f;
-        private const float HitDuration = 0.35f;
-        private const float HitSpeed = 50f;
+        private const float Speed = 3.5f;
+        private const float HitDuration = 0.5f;
+        private const float HitSpeed = 35f;
         private const float WanderDirectionUpdateInterval = 0.25f;
         private const float WanderAngularSpeed = 4 * Mathf.PI;
 
