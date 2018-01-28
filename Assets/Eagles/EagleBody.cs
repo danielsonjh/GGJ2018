@@ -7,7 +7,7 @@ namespace Eagles
     {
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Pigeon"))
+            if (other.CompareTag(Tags.PigeonBody))
             {
                 other.GetComponentInParent<Pigeon>().Kill();
             }

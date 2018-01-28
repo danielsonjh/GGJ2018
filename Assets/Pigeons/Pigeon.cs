@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using Payloads;
+using UnityEngine;
 
 namespace Pigeons
 {
     public class Pigeon : MonoBehaviour
     {
-        public ResourceColor Color;
-
         private const float MaxSpeed = 3.5f;
         private const float MinSpeed = 2.5f;
         private const float MaxGravityScale = 5f;
@@ -16,6 +15,7 @@ namespace Pigeons
         private static readonly Vector2 StartPosition = new Vector2(-8f, 3f);
 
         private float _speed;
+        private IPayload _payload;
 
         void Start()
         {
@@ -23,7 +23,6 @@ namespace Pigeons
             GetComponent<Rigidbody2D>().gravityScale = Random.Range(MinGravityScale, MaxGravityScale);
             GetComponent<Rigidbody2D>().drag = LinearDrag;
             transform.position = StartPosition;
-            GetComponent<SpriteRenderer>().color = Color.ToUnityColor();
         }
 
         void Update()
@@ -41,15 +40,21 @@ namespace Pigeons
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * ClickForce, ForceMode2D.Impulse);
         }
 
+        public void SetPayload(IPayload payload)
+        {
+            _payload = payload;
+            transform.Find("Payload").GetComponent<SpriteRenderer>().sprite = _payload.Sprite;
+        }
+
         public void Kill()
         {
-            Resource.Map[Color].Decrease();
+            Resource.Instance.LosePayload(_payload);
             Destroy(gameObject);
         }
 
         private void FinishJourney()
         {
-            Resource.Map[Color].Increase();
+            Resource.Instance.DeliverPayload(_payload);
             Destroy(gameObject);
         }
     }

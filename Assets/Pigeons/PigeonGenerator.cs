@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Payloads;
+using UnityEngine;
 
 namespace Pigeons
 {
@@ -18,7 +19,7 @@ namespace Pigeons
             if (_secondsUntilNextBird < 0)
             {
                 var pigeon = Instantiate(Pigeon);
-                pigeon.GetComponent<Pigeon>().Color = ResourceColorExtensions.GetRandom();
+                pigeon.GetComponent<Pigeon>().SetPayload(PayloadGenerator.Instance.Generate());
                 _secondsUntilNextBird = SecondsBetweenBirds;
             }
         }
