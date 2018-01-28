@@ -63,7 +63,6 @@ namespace Eagles
 
         private void SetHorizontalFlip()
         {
-            print(transform.position.x - _prevPosition.x);
             transform.localScale = transform.position.x - _prevPosition.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         }
 
