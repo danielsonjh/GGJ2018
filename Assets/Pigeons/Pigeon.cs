@@ -4,17 +4,12 @@ namespace Pigeons
 {
     public class Pigeon : MonoBehaviour
     {
-
         private const float MaxSpeed = 3.5f;
         private const float MinSpeed = 2.5f;
-
         private const float MaxGravityScale = 5f;
         private const float MinGravityScale = 3f;
-
         private const float ClickForce = 25f;
-
         private const float LinearDrag = 6f;
-
 
         private static readonly Vector2 StartPosition = new Vector2(-8f, 3f);
 

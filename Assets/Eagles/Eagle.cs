@@ -1,4 +1,5 @@
 ﻿using Pigeons;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -9,10 +10,19 @@ namespace Eagles
         private const float Speed = 4f;
         private const float HitDuration = 0.35f;
         private const float HitSpeed = 50f;
+        private const float WanderDirectionUpdateInterval = 0.25f;
+        private const float WanderAngularSpeed = 4 * Mathf.PI;
 
         private int _health = 3;
         private float _hitTimer;
         private Pigeon _nearestPigeon;
+        private Vector3 _targetWanderDirection;
+        private Vector3 _wanderDirection;
+
+        void Start()
+        {
+            StartCoroutine(ChangeTargetWanderDirection());
+        }
 
         void Update()
         {
@@ -24,7 +34,14 @@ namespace Eagles
             else
             {
                 FindNearestPigeon();
-                HuntNearestPigeon();
+                if (_nearestPigeon != null)
+                {
+                    HuntNearestPigeon();
+                }
+                else
+                {
+                    Wander();
+                }
             }
         }
 
@@ -36,6 +53,7 @@ namespace Eagles
             if (_health <= 0)
             {
                 Destroy(gameObject);
+                EagleGenerator.Instance.Count--;
             }
         }
 
@@ -61,6 +79,12 @@ namespace Eagles
             transform.position += GetDirectionToNearestPigeon() * Speed * Time.deltaTime;
         }
 
+        private void Wander()
+        {
+            _wanderDirection = Vector3.RotateTowards(_wanderDirection, _targetWanderDirection, WanderAngularSpeed * Time.deltaTime, 100.0f);
+            transform.position += _wanderDirection * Speed * Time.deltaTime;
+        }
+
         private void Flee()
         {
             transform.position -= GetDirectionToNearestPigeon() * HitSpeed * Mathf.Pow(_hitTimer, 2f) / HitDuration * Time.deltaTime;
@@ -68,7 +92,16 @@ namespace Eagles
 
         private Vector3 GetDirectionToNearestPigeon()
         {
-            return _nearestPigeon == null ? Vector3.zero : (_nearestPigeon.transform.position - transform.position).normalized;
+            return _nearestPigeon == null ? _wanderDirection : (_nearestPigeon.transform.position - transform.position).normalized;
+        }
+
+        private IEnumerator ChangeTargetWanderDirection()
+        {
+            while (true)
+            {
+                _targetWanderDirection = Random.insideUnitCircle.normalized;
+                yield return new WaitForSeconds(WanderDirectionUpdateInterval);
+            }
         }
     }
 }
