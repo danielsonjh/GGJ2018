@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private AudioClip _buttonPressAudioClip;
 
 
     void Awake()
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
+        AudioSourcePool.Instance.Play(_buttonPressAudioClip);
         SceneManager.LoadScene(Scenes.Game);
     }
 }

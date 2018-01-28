@@ -14,6 +14,10 @@ namespace Pigeons
 
         private static readonly Vector2 StartPosition = new Vector2(-8f, 3f);
 
+        [SerializeField] private AudioClip[] _cooAudioClips;
+        [SerializeField] private AudioClip _sadCooAudioClip;
+        [SerializeField] private AudioClip _finishJourneyClip;
+
         private float _speed;
         private IPayload _payload;
 
@@ -37,6 +41,7 @@ namespace Pigeons
 
         void OnMouseUp()
         {
+            AudioSourcePool.Instance.Play(_cooAudioClips[Random.Range(0, _cooAudioClips.Length)]);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * ClickForce, ForceMode2D.Impulse);
         }
 
@@ -48,12 +53,14 @@ namespace Pigeons
 
         public void Kill()
         {
+            AudioSourcePool.Instance.Play(_sadCooAudioClip);
             Resource.Instance.LosePayload(_payload);
             Destroy(gameObject);
         }
 
         private void FinishJourney()
         {
+            AudioSourcePool.Instance.Play(_finishJourneyClip);
             Resource.Instance.DeliverPayload(_payload);
             Destroy(gameObject);
         }

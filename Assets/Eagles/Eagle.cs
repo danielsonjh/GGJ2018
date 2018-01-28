@@ -14,6 +14,8 @@ namespace Eagles
         private const float WanderDirectionUpdateInterval = 0.25f;
         private const float WanderAngularSpeed = 4 * Mathf.PI;
 
+        [SerializeField] private AudioClip _hitAudioClip;
+
         private int _health = 3;
         private float _hitTimer;
         private Pigeon _nearestPigeon;
@@ -64,6 +66,8 @@ namespace Eagles
                 Destroy(gameObject);
                 EagleGenerator.Instance.Count--;
             }
+
+            AudioSourcePool.Instance.Play(_hitAudioClip);
         }
 
         private void SetHorizontalFlip()
