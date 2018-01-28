@@ -41,6 +41,12 @@ namespace Pigeons
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * ClickForce, ForceMode2D.Impulse);
         }
 
+        public void Kill()
+        {
+            Resource.Map[Color].Decrease();
+            Destroy(gameObject);
+        }
+
         private void FinishJourney()
         {
             Resource.Map[Color].Increase();

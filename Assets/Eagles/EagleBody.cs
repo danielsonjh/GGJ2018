@@ -9,8 +9,7 @@ namespace Eagles
         {
             if (other.CompareTag("Pigeon"))
             {
-                Resource.Map[other.GetComponentInParent<Pigeon>().Color].Decrease();
-                Destroy(other.transform.parent.gameObject);
+                other.GetComponentInParent<Pigeon>().Kill();
             }
         }
     }
