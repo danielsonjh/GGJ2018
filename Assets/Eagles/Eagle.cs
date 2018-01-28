@@ -18,6 +18,7 @@ namespace Eagles
         private Pigeon _nearestPigeon;
         private Vector3 _targetWanderDirection;
         private Vector3 _wanderDirection;
+        private Vector3 _prevPosition;
 
         void Start()
         {
@@ -43,6 +44,9 @@ namespace Eagles
                     Wander();
                 }
             }
+
+            SetHorizontalFlip();
+            _prevPosition = transform.position;
         }
 
         void OnMouseUp()
@@ -55,6 +59,12 @@ namespace Eagles
                 Destroy(gameObject);
                 EagleGenerator.Instance.Count--;
             }
+        }
+
+        private void SetHorizontalFlip()
+        {
+            print(transform.position.x - _prevPosition.x);
+            transform.localScale = transform.position.x - _prevPosition.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
         }
 
         private void FindNearestPigeon()
