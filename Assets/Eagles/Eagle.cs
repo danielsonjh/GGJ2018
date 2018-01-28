@@ -7,6 +7,7 @@ namespace Eagles
 {
     public class Eagle : MonoBehaviour
     {
+        private const string HitAnimationParam = "IsHit";
         private const float Speed = 4f;
         private const float HitDuration = 0.35f;
         private const float HitSpeed = 50f;
@@ -19,15 +20,19 @@ namespace Eagles
         private Vector3 _targetWanderDirection;
         private Vector3 _wanderDirection;
         private Vector3 _prevPosition;
+        private Animator _animator;
 
         void Start()
         {
             StartCoroutine(ChangeTargetWanderDirection());
+            _animator = GetComponent<Animator>();
         }
 
         void Update()
         {
-            if (_hitTimer > 0)
+            _animator.SetBool(HitAnimationParam, IsHit());
+
+            if (IsHit())
             {
                 _hitTimer -= Time.deltaTime;
                 Flee();
@@ -63,7 +68,12 @@ namespace Eagles
 
         private void SetHorizontalFlip()
         {
-            transform.localScale = transform.position.x - _prevPosition.x > 0 ? new Vector3(-1, 1, 1) : new Vector3(1, 1, 1);
+            if (!IsHit())
+            {
+                transform.localScale = transform.position.x - _prevPosition.x > 0
+                    ? new Vector3(-1, 1, 1)
+                    : new Vector3(1, 1, 1);
+            }
         }
 
         private void FindNearestPigeon()
@@ -97,6 +107,11 @@ namespace Eagles
         private void Flee()
         {
             transform.position -= GetDirectionToNearestPigeon() * HitSpeed * Mathf.Pow(_hitTimer, 2f) / HitDuration * Time.deltaTime;
+        }
+
+        private bool IsHit()
+        {
+            return _hitTimer > 0;
         }
 
         private Vector3 GetDirectionToNearestPigeon()

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114699234551580998}
   - component: {fileID: 50855999916822122}
   - component: {fileID: 58157331765922668}
+  - component: {fileID: 95567027762748910}
   m_Layer: 0
   m_Name: Eagle
   m_TagString: Untagged
@@ -124,6 +125,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!95 &95567027762748910
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1993770510219394}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21a78e715117a3045a0c06ee51d8b03a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114483148811037002
 MonoBehaviour:
   m_ObjectHideFlags: 1
