@@ -58,11 +58,13 @@ namespace Eagles
 
         void OnMouseUp()
         {
+            transform.Find("Feathers").GetComponent<ParticleSystem>().Play();
             _hitTimer = HitDuration;
             _health--;
 
             if (_health <= 0)
             {
+                GetComponentInChildren<BloodParticles>().PlayAndDestroy();
                 Destroy(gameObject);
                 EagleGenerator.Instance.Count--;
             }

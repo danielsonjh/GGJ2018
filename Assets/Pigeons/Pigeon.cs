@@ -41,6 +41,7 @@ namespace Pigeons
 
         void OnMouseUp()
         {
+            transform.Find("Feathers").GetComponent<ParticleSystem>().Play();
             AudioSourcePool.Instance.Play(_cooAudioClips[Random.Range(0, _cooAudioClips.Length)]);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * ClickForce, ForceMode2D.Impulse);
         }
@@ -53,6 +54,7 @@ namespace Pigeons
 
         public void Kill()
         {
+            GetComponentInChildren<BloodParticles>().PlayAndDestroy();
             AudioSourcePool.Instance.Play(_sadCooAudioClip);
             Resource.Instance.LosePayload(_payload);
             Destroy(gameObject);
