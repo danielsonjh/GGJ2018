@@ -1,4 +1,4 @@
 ﻿public static class Tags
 {
-    public static string PigeonBody = "Pigeon";
+    public static readonly string PigeonBody = "Pigeon";
 }

@@ -9,9 +9,5 @@ public class Destructor : MonoBehaviour
         {
             other.GetComponentInParent<Pigeon>().Kill();
         }
-        else
-        {
-            Destroy(other.gameObject);
-        }
     }
 }

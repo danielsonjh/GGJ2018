@@ -22,7 +22,9 @@ public class Resource : MonoBehaviour
 
     void Update()
     {
-        _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -Screen.height * (MaxValue - _value) / MaxValue);
+        print(Screen.height);
+        print(_value);
+        _rectTransform.offsetMax = new Vector2(_rectTransform.offsetMax.x, -1080 * (MaxValue - _value) / MaxValue);
     }
 
     public void DeliverPayload(IPayload payload)
@@ -36,7 +38,7 @@ public class Resource : MonoBehaviour
 
         if (_value < 0)
         {
-            Debug.LogError("GAME OVER");
+            GameManager.Instance.EndGame();
             Time.timeScale = 0;
         }
     }
