@@ -17,7 +17,8 @@ namespace Pigeons
 
             if (_secondsUntilNextBird < 0)
             {
-                Instantiate(Pigeon);
+                var pigeon = Instantiate(Pigeon);
+                pigeon.GetComponent<Pigeon>().Color = ResourceColorExtensions.GetRandom();
                 _secondsUntilNextBird = SecondsBetweenBirds;
             }
         }

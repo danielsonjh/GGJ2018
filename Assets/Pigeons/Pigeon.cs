@@ -4,6 +4,8 @@ namespace Pigeons
 {
     public class Pigeon : MonoBehaviour
     {
+        public ResourceColor Color;
+
         private const float MaxSpeed = 3.5f;
         private const float MinSpeed = 2.5f;
         private const float MaxGravityScale = 5f;
@@ -21,6 +23,7 @@ namespace Pigeons
             GetComponent<Rigidbody2D>().gravityScale = Random.Range(MinGravityScale, MaxGravityScale);
             GetComponent<Rigidbody2D>().drag = LinearDrag;
             transform.position = StartPosition;
+            GetComponent<SpriteRenderer>().color = Color.ToUnityColor();
         }
 
         void Update()
@@ -40,7 +43,7 @@ namespace Pigeons
 
         private void FinishJourney()
         {
-            Stats.Instance.Score++;
+            Resource.Map[Color].Increase(20);
             Destroy(gameObject);
         }
     }
